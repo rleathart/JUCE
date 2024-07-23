@@ -2619,6 +2619,9 @@ public:
     void contains (int, int) = delete;
    #endif
 
+    static void setRepaintDebuggingEnabled(std::function<bool(const Component&)> callback);
+    bool isRepaintDebuggingEnabled();
+
 private:
 
     //==============================================================================
@@ -2724,6 +2727,8 @@ private:
     void giveAwayKeyboardFocusInternal (bool sendFocusLossEvent);
     void sendEnablementChangeMessage();
     void sendVisibilityChangeMessage();
+
+    static std::function<bool(const Component&)> internalRepaintDebuggingCallback;
 
     friend struct detail::ComponentHelpers;
 

@@ -568,14 +568,10 @@ public:
     {
         Graphics g (llgc);
 
-      #if JUCE_ENABLE_REPAINT_DEBUGGING
-       #ifdef JUCE_IS_REPAINT_DEBUGGING_ACTIVE
-        if (JUCE_IS_REPAINT_DEBUGGING_ACTIVE)
-       #endif
+        if (isRepaintDebuggingEnabled())
         {
             g.saveState();
         }
-       #endif
 
         JUCE_TRY
         {
@@ -583,10 +579,7 @@ public:
         }
         JUCE_CATCH_EXCEPTION
 
-      #if JUCE_ENABLE_REPAINT_DEBUGGING
-       #ifdef JUCE_IS_REPAINT_DEBUGGING_ACTIVE
-        if (JUCE_IS_REPAINT_DEBUGGING_ACTIVE)
-       #endif
+        if (isRepaintDebuggingEnabled())
         {
             // enabling this code will fill all areas that get repainted with a colour overlay, to show
             // clearly when things are being repainted.
@@ -598,7 +591,6 @@ public:
                                (uint8) rng.nextInt (255),
                                (uint8) 0x50));
         }
-       #endif
     }
 
     void handleResize()
