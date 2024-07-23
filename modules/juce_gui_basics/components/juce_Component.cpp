@@ -53,6 +53,10 @@ static Component* findFirstEnabledAncestor (Component* in)
 
 Component* Component::currentlyFocusedComponent = nullptr;
 
+std::function<bool(const Component&)> Component::internalRepaintDebuggingCallback = [] (const Component&) {
+  return false;
+};
+
 //==============================================================================
 class HierarchyChecker
 {
@@ -3002,6 +3006,20 @@ AccessibilityHandler* Component::getAccessibilityHandler()
     }
 
     return accessibilityHandler.get();
+}
+
+void Component::setRepaintDebuggingEnabled(std::function<bool(const Component&)> callback)
+{
+  internalRepaintDebuggingCallback = std::move(callback);
+}
+
+bool Component::isRepaintDebuggingEnabled()
+{
+  if (internalRepaintDebuggingCallback == nullptr)
+    return false;
+
+  auto enabled = internalRepaintDebuggingCallback(*this);
+  return enabled;
 }
 
 } // namespace juce

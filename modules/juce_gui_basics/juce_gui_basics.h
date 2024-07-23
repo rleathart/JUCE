@@ -70,15 +70,6 @@
 #include <juce_data_structures/juce_data_structures.h>
 
 //==============================================================================
-/** Config: JUCE_ENABLE_REPAINT_DEBUGGING
-    If this option is turned on, each area of the screen that gets repainted will
-    flash in a random colour, so that you can see exactly which bits of your
-    components are being drawn.
-*/
-#ifndef JUCE_ENABLE_REPAINT_DEBUGGING
- #define JUCE_ENABLE_REPAINT_DEBUGGING 0
-#endif
-
 /** Config: JUCE_USE_XRANDR
     Enables Xrandr multi-monitor support (Linux only).
     Unless you specifically want to disable this, it's best to leave this option turned on.

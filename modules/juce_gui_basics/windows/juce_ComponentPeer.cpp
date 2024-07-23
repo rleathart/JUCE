@@ -130,14 +130,10 @@ void ComponentPeer::handlePaint (LowLevelGraphicsContext& contextToPaintTo)
         g.addTransform (AffineTransform::scale ((float) peerBounds.getWidth()  / (float) componentBounds.getWidth(),
                                                 (float) peerBounds.getHeight() / (float) componentBounds.getHeight()));
 
-  #if JUCE_ENABLE_REPAINT_DEBUGGING
-   #ifdef JUCE_IS_REPAINT_DEBUGGING_ACTIVE
-    if (JUCE_IS_REPAINT_DEBUGGING_ACTIVE)
-   #endif
+    if (component.isRepaintDebuggingEnabled())
     {
         g.saveState();
     }
-  #endif
 
     JUCE_TRY
     {
@@ -145,10 +141,7 @@ void ComponentPeer::handlePaint (LowLevelGraphicsContext& contextToPaintTo)
     }
     JUCE_CATCH_EXCEPTION
 
-  #if JUCE_ENABLE_REPAINT_DEBUGGING
-   #ifdef JUCE_IS_REPAINT_DEBUGGING_ACTIVE
-    if (JUCE_IS_REPAINT_DEBUGGING_ACTIVE)
-   #endif
+    if (component.isRepaintDebuggingEnabled())
     {
         // enabling this code will fill all areas that get repainted with a colour overlay, to show
         // clearly when things are being repainted.
@@ -161,7 +154,6 @@ void ComponentPeer::handlePaint (LowLevelGraphicsContext& contextToPaintTo)
                            (uint8) rng.nextInt (255),
                            (uint8) 0x50));
     }
-  #endif
 
     /** If this fails, it's probably be because your CPU floating-point precision mode has
         been set to low.. This setting is sometimes changed by things like Direct3D, and can
