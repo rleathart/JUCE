@@ -2531,6 +2531,10 @@ namespace AAXClasses
         properties->AddProperty (AAX_eProperty_SupportsSaveRestore, false);
        #endif
 
+       #if JucePlugin_AAXRequiresChunkCallsOnMainThread
+        properties->AddProperty (AAX_eProperty_RequiresChunkCallsOnMainThread, true);
+       #endif
+
         properties->AddProperty (AAX_eProperty_ObservesTransportState, true);
 
         if (fullLayout.getChannelSet (true, 1) == AudioChannelSet::mono())
